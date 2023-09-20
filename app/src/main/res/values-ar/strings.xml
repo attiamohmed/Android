@@ -3,5 +3,5 @@
     <string name="app_name">Mohamed Attia Android Labs</string>
     <string name="hello_message">مرحبا بالعالم</string>
     <string name="buttom_message">زر</string>
-
+    <string name="edittext_message">تحرير لي</string>
 </resources>
