@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -31,6 +32,22 @@ public class MainActivity extends AppCompatActivity {
         Button b = binding.myButton;
         EditText ed = binding.myEdit;
         ed.setText(viewModel.userString.getValue());
+        binding.myCheck.setOnCheckedChangeListener(
+                ( chc, onOroff ) -> { viewModel.onOroff.postValue(onOroff); }
+
+        );
+        binding.mySwitch.setOnCheckedChangeListener(
+                (swt, onOroff) -> { viewModel.onOroff.postValue( onOroff);}
+        );
+        binding.myRadio.setOnCheckedChangeListener(
+                ( rdi, onOroff) -> { viewModel.onOroff.postValue(onOroff);}
+        );
+
+        viewModel.onOroff.observe( this, newValue ->{
+            binding.myCheck.setChecked(newValue);
+            binding.mySwitch.setChecked(newValue);
+            binding.myRadio.setChecked(newValue);
+        });
         viewModel.userString.observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {

@@ -28,8 +28,25 @@
         android:textSize="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="90dp"
         android:text="@string/edittext_message" />
+    
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Do you drink coffee?"
+        android:id="@+id/myCheck" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Do you drink coffee?"
+        android:id="@+id/mySwitch" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Do you drink coffee?"
+        android:id="@+id/myRadio" />
 
 
 </LinearLayout>
