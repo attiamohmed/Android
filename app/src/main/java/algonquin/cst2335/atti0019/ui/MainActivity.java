@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -40,20 +41,38 @@ public class MainActivity extends AppCompatActivity {
         TextView tv = binding.myText;
         Button b = binding.myButton;
         EditText ed = binding.myEdit;
+        ImageButton Im = binding.myImgb;
         ed.setText(viewModel.userString.getValue());
 
         binding.myCheck.setOnCheckedChangeListener(
-                ( chc, onOroff ) -> { viewModel.onOroff.postValue(onOroff); }
+                ( chc, Checked ) -> { //viewModel.onOroff.postValue(Checked);
+                    if (Checked){
+                        Toast.makeText(MainActivity.this, "Checked", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(MainActivity.this,"Unchecked", Toast.LENGTH_SHORT).show();
+                    }}
 
         );
         binding.mySwitch.setOnCheckedChangeListener(
-                (swt, onOroff) -> { viewModel.onOroff.postValue( onOroff);}
+                (swt, Switched) -> { // viewModel.onOroff.postValue( Switched);
+                    if(Switched){
+                        Toast.makeText(MainActivity.this,"Switched", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(MainActivity.this, "Unswitched", Toast.LENGTH_SHORT).show();
+                    }}
         );
         binding.myRadio.setOnCheckedChangeListener(
-                ( rdi, onOroff) -> { viewModel.onOroff.postValue(onOroff);}
+                ( rdi, Clicked ) -> { // viewModel.onOroff.postValue(Clicked);
+                    if(Clicked){
+                        Toast.makeText(MainActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                    }}
         );
         binding.myImgb.setOnClickListener(
-                clik ->{ }
+                clik ->{
+
+                }
         );
         viewModel.onOroff.observe( this, newValue ->{
             binding.myCheck.setChecked(newValue);
@@ -80,37 +99,17 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        //checToast = findViewById(R.id.myCheck);
-        // checToast.setOnClickListener(new View.OnClickListener() {
-            //@Override
-            //public void onClick(View view) {
-              //  Toast.makeText(MainActivity.this,"checked", Toast.LENGTH_SHORT).show();
-            //}
-        //});
-        //swtToast = findViewById(R.id.mySwitch);
-        //swtToast.setOnClickListener(new View.OnClickListener() {
-            //@Override
-          //  public void onClick(View view) {
-              //  Toast.makeText(MainActivity.this, "Switched", Toast.LENGTH_SHORT).show();
-            //}
-        //});
-        //rdiToast = findViewById(R.id.myRadio);
-        //rdiToast.setOnClickListener(new View.OnClickListener() {
-          //  @Override
-            //public void onClick(View view) {
-              //  Toast.makeText(MainActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
-            //}
-      //  });
-        checToast.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        Im.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    Toast.makeText(MainActivity.this, "Checked", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(MainActivity.this,"Unchecked", Toast.LENGTH_SHORT).show();
-                }
+            public void onClick(View view) {
+                int width = view.getWidth();
+                int height = view.getHeight();
+                String message = "The width = " + width + " and height = " + height;
+                Toast.makeText(MainActivity.this,message,Toast.LENGTH_SHORT).show();
             }
         });
+
     }
+
+
 }

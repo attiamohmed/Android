@@ -48,20 +48,19 @@
         android:text="Do you drink coffee?"
         android:id="@+id/myRadio" />
 
-    <ImageView
-        android:src="@drawable/image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/myImgv"
-        android:layout_marginBottom="30dp"/>
 
+    <ImageView
+        android:id="@+id/myImgv"
+        android:layout_width="match_parent"
+        android:layout_height="114dp"
+        android:src="@drawable/image"
+        android:layout_marginBottom="10dp"/>
 
     <ImageButton
-        android:src="@drawable/image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/myImgb" />
-
+        android:id="@+id/myImgb"
+        android:layout_width="match_parent"
+        android:layout_height="114dp"
+        android:src="@drawable/image" />
 
 
 </LinearLayout>

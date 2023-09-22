@@ -7,6 +7,5 @@ public class MainViewModel extends ViewModel {
 
     public MutableLiveData<String> userString = new MutableLiveData("");
     public MutableLiveData<Boolean> onOroff = new MutableLiveData<Boolean>(false);
-
 }
 
