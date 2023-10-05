@@ -2,4 +2,5 @@
     <string name="app_name">Mohamed Attia Android Labs</string>
     <string name="hello_message"> Hello World</string>
     <string name="buttom_message">Button</string>
+    <string name="spin_message">Spin flag</string>
 </resources>
