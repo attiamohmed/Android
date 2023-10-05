@@ -3,5 +3,8 @@
     <string name="app_name">Mohamed Attia Android Labs</string>
     <string name="hello_message">مرحبا بالعالم</string>
     <string name="buttom_message">زر</string>
-
+    <string name="spin_message">تدور العلم</string>
+    <string name="button1">الزر الأول </string>
+    <string name="button2">الزر الثاني</string>
+    <string name="button3">الزر الثالث</string>
 </resources>
