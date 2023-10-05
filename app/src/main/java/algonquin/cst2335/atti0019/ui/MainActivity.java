@@ -45,18 +45,29 @@ public class MainActivity extends AppCompatActivity {
         ed.setText(viewModel.userString.getValue());
 
         binding.myCheck.setOnCheckedChangeListener(
-                ( chc, Checked ) -> { viewModel.onOroff.postValue(Checked);
-                   }
+                ( chc, Checked ) -> { //viewModel.onOroff.postValue(Checked);
+                    if (Checked){
+                        Toast.makeText(MainActivity.this, "Checked", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(MainActivity.this,"Unchecked", Toast.LENGTH_SHORT).show();
+                    }}
 
         );
         binding.mySwitch.setOnCheckedChangeListener(
-                (swt, Switched) -> {  viewModel.onOroff.postValue( Switched);
-              }
+                (swt, Switched) -> { // viewModel.onOroff.postValue( Switched);
+                    if(Switched){
+                        Toast.makeText(MainActivity.this,"Switched", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(MainActivity.this, "Unswitched", Toast.LENGTH_SHORT).show();
+                    }}
         );
         binding.myRadio.setOnCheckedChangeListener(
-                ( rdi, Clicked ) -> {
-                    viewModel.onOroff.postValue(Clicked);
-                }
+                ( rdi, Clicked ) -> { // viewModel.onOroff.postValue(Clicked);
+                    if(Clicked){
+                        Toast.makeText(MainActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                    }}
         );
         binding.myImgb.setOnClickListener(
                 clik ->{
@@ -64,12 +75,6 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
         viewModel.onOroff.observe( this, newValue ->{
-            if (newValue){
-                Toast.makeText(MainActivity.this, "Checked", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                Toast.makeText(MainActivity.this,"Unchecked", Toast.LENGTH_SHORT).show();
-            }
             binding.myCheck.setChecked(newValue);
             binding.mySwitch.setChecked(newValue);
             binding.myRadio.setChecked(newValue);
