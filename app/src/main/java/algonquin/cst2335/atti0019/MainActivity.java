@@ -2,8 +2,11 @@ package algonquin.cst2335.atti0019;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+
+import algonquin.cst2335.atti0019.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -11,6 +14,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        binding.loginbutton.setOnClickListener( click->{
+
+            Intent newPage = new Intent(MainActivity.this, MainActivity2.class);
+
+           String userI = binding.editEmail.getText().toString();
+            newPage.putExtra("Email", userI);
+            String userII = binding.editPassword.getText().toString();
+            newPage.putExtra("Passwprd", userII);
+            startActivity(newPage);
+
+        } );
+
+
+
         Log.w( "MainActivity", "In onCreate() - Loading Widgets" );
     }
 
