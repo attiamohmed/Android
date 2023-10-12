@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Mohamed Attia Android Labs</string>
-    <string name="hello_message">مرحبا بالعالم</string>
-    <string name="buttom_message">زر</string>
-
+    <string name="app_name">أدخل عنوان بريدك الالكتروني</string>
+    <string name="hello_message">اكتب بريدك الإلكتروني هنا</string>
+    <string name="buttom_message">تسجيل الدخول</string>
+    <string name="email_message">اكتب بريدك الإلكتروني هنا</string>
+    <string name="pass_message">اكتب كلمة المرور الخاصة بك </string>
 </resources>
