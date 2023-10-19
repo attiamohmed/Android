@@ -69,7 +69,7 @@ try {
         ViewInteraction appCompatEditText = onView(withId(R.id.tp));
         appCompatEditText.perform(click());
 
-        appCompatEditText.perform(replaceText("1234"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("AAAA"), closeSoftKeyboard());
 
         ViewInteraction materialButton = onView(withId(R.id.bb));
         materialButton.perform(click());
@@ -106,6 +106,7 @@ try {
         ViewInteraction textView = onView(withId(R.id.tv));
         textView.check(matches(withText("You shall not pass!")));
     }
+
 
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
