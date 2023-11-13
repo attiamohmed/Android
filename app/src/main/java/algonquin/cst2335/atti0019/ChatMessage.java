@@ -1,25 +1,55 @@
 package algonquin.cst2335.atti0019;
 
-public class ChatMessage {
-    private String message;
-    private String timeSent;
-    private boolean isSent;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-    public ChatMessage(String message, String timeSent, boolean isSent) {
-        this.message = message;
-        this.timeSent = timeSent;
-        this.isSent = isSent;
+@Entity
+public class ChatMessage {
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    public long id;
+
+    @ColumnInfo(name = "message")
+    private String message;
+
+    @ColumnInfo(name = "timeSent")
+    private String timeSent;
+
+    @ColumnInfo(name = "isSentButton")
+    private boolean isSentButton;
+
+    public ChatMessage() {
+    }
+
+    public ChatMessage(String m, String t, boolean sent) {
+        setMessage(m);
+        setTimeSent(t);
+        setIsSentButton(sent);
     }
 
     public String getMessage() {
         return message;
     }
 
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public String getTimeSent() {
         return timeSent;
     }
 
-    public boolean isSent() {
-        return isSent;
+    public void setTimeSent(String timeSent) {
+        this.timeSent = timeSent;
+    }
+
+    public boolean getIsSentButton() {
+        return isSentButton;
+    }
+
+    public void setIsSentButton(boolean isSentButton) {
+        this.isSentButton = isSentButton;
     }
 }
