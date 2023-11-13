@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,92 +21,90 @@ import algonquin.cst2335.atti0019.databinding.SentRowBinding;
 
 public class ChatRoom extends AppCompatActivity {
 
-    ArrayList<String> theMessages = null;
-    ActivityChatRoomBinding binding;
-    RecyclerView.Adapter myAdapter = null;
+    private ActivityChatRoomBinding binding;
+    private ArrayList<ChatMessage> messages;
+    private ChatRoomViewModel chatModel;
+    private RecyclerView.Adapter myAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityChatRoomBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.myRecycleView.setLayoutManager(new LinearLayoutManager(this));
+        chatModel = new ViewModelProvider(this).get(ChatRoomViewModel.class);
+        // initialize to the ViewModel arraylist
+        messages = chatModel.messages.getValue();
+        if (messages == null) {
+            chatModel.messages.postValue(messages = new ArrayList<ChatMessage>());
+        }
 
-        MessagesViewModel chatModel = new ViewModelProvider(this).get(MessagesViewModel.class);
-        theMessages = chatModel.theMessages;
-
-        binding.send.setOnClickListener(click -> {
-            String newMessage = binding.newMessage.getText().toString();
+        binding.sendButton.setOnClickListener(click -> {
             SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh-mm-ss a");
-            String currentDateandTime = sdf.format(new Date());
-            ChatMessage chatMessage = new ChatMessage(newMessage, currentDateandTime, true);
-            theMessages.add(newMessage);
-            binding.newMessage.setText("");
-            myAdapter.notifyDataSetChanged();
-            binding.myRecycleView.scrollToPosition(theMessages.size() - 1);
+            String currentDateAndTime = sdf.format(new Date());
+            messages.add(new ChatMessage(binding.textInput.getText().toString(), currentDateAndTime, true));
+            myAdapter.notifyItemInserted(messages.size() - 1);
+            //clear the previous text
+            binding.textInput.setText("");
         });
 
-        binding.receive.setOnClickListener(click -> {
-            String newMessage = binding.newMessage.getText().toString();
+        binding.receiveButton.setOnClickListener(click -> {
             SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh-mm-ss a");
-            String currentDateandTime = sdf.format(new Date());
-            ChatMessage chatMessage = new ChatMessage(newMessage, currentDateandTime, false);
-            theMessages.add(newMessage);
-            binding.newMessage.setText("");
-            myAdapter.notifyDataSetChanged();
-            binding.myRecycleView.scrollToPosition(theMessages.size() - 1);
+            String currentDateAndTime = sdf.format(new Date());
+            messages.add(new ChatMessage(binding.textInput.getText().toString(), currentDateAndTime, false));
+            myAdapter.notifyItemInserted(messages.size() - 1);
+            //clear the previous text
+            binding.textInput.setText("");
         });
 
-        binding.myRecycleView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
+        binding.recycleView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
             @NonNull
             @Override
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View itemView;
                 if (viewType == 0) {
-                    SentRowBinding rowBinding = SentRowBinding.inflate(getLayoutInflater(), parent, false);
-                    itemView = rowBinding.getRoot();
+                    SentRowBinding binding = SentRowBinding.inflate(getLayoutInflater());
+                    return new MyRowHolder(binding.getRoot());
                 } else {
-                    ReceiveRowBinding rowBinding = ReceiveRowBinding.inflate(getLayoutInflater(), parent, false);
-                    itemView = rowBinding.getRoot();
-                }
-                return new MyRowHolder(itemView);
-            }
-
-            @Override
-            public int getItemViewType(int position) {
-                // Use position to determine whether the message is sent or received
-                if (position % 2 == 0) {
-                    return 0; // Sent message
-                } else {
-                    return 1; // Received message
+                    ReceiveRowBinding binding = ReceiveRowBinding.inflate(getLayoutInflater(), parent, false);
+                    return new MyRowHolder(binding.getRoot());
                 }
             }
 
             @Override
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
-                String forRow = theMessages.get(position);
-                holder.message.setText(forRow);
-                holder.time.setText("Time for row " + position);
+                ChatMessage obj = messages.get(position);
+                holder.messageText.setText(obj.getMessage());
+                holder.timeText.setText(obj.getTimeSent());
             }
 
             @Override
             public int getItemCount() {
-                return theMessages.size();
+                return messages.size();
+            }
+
+            public int getItemViewType(int position) {
+                ChatMessage obj = messages.get(position);
+                if (obj.getIsSentButton() == true) return 0;
+                else return 1;
             }
         });
+
+        // To specify a single column scrolling in a Vertical direction
+        binding.recycleView.setLayoutManager(new LinearLayoutManager(this));
+
     }
 
-    class MyRowHolder extends RecyclerView.ViewHolder {
-        public TextView message;
-        public TextView time;
+
+    public class MyRowHolder extends RecyclerView.ViewHolder {
+        ArrayList<String> messages = new ArrayList<>();
+        TextView messageText;
+        TextView timeText;
 
         public MyRowHolder(@NonNull View itemView) {
             super(itemView);
-
-            message = itemView.findViewById(R.id.message);
-            time = itemView.findViewById(R.id.time);
+            messageText = itemView.findViewById(R.id.message);
+            timeText = itemView.findViewById(R.id.time);
         }
     }
+
 }
