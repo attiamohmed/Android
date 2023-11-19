@@ -1,11 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.MohamedAttiaAndroidLabs" parent="Theme.Material3.DayNight">
-        <!-- Customize your light theme here. -->
-        <item name="colorPrimary">@color/my_primary</item>
-        <item name="colorSecondary">@color/my_secondary</item>
-        <item name="android:statusBarColor">@color/my_statusbar</item>
-        <item name="android:textColor">@color/my_text</item>
+        <!-- tell Android not to use ActionBar -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
     </style>
 
     <style name="Theme.MohamedAttiaAndroidLabs" parent="Base.Theme.MohamedAttiaAndroidLabs" />
