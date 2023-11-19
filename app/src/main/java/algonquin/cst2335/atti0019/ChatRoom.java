@@ -147,7 +147,7 @@ public class ChatRoom extends AppCompatActivity {
                 // show the fragment on screen
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .addToBackStack("do not matter")
+                        .addToBackStack("Doesn't matter")
                         .replace(R.id.fragmentLocation, chatFragment)
                         .commit();
 //                FragmentManager fMgr = getSupportFragmentManager();
@@ -169,6 +169,7 @@ public class ChatRoom extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.delete) {
+
             // click option to delete this message
             TextView messageText = findViewById(R.id.messageText);
             AlertDialog.Builder builder = new AlertDialog.Builder(ChatRoom.this);
@@ -205,7 +206,11 @@ public class ChatRoom extends AppCompatActivity {
             Toast.makeText(this, "Version 1.0, created by Mohamed Attia", Toast.LENGTH_LONG).show();
         }
         return true;
+
+
     }
+
+
 
     public class MyRowHolder extends RecyclerView.ViewHolder {
         TextView messageText;
@@ -221,6 +226,39 @@ public class ChatRoom extends AppCompatActivity {
                 ChatMessage selected = messages.get(position);
                 chatModel.selectedMessage.postValue(selected);
 
+                // click message to delete it
+                /*
+                AlertDialog.Builder builder = new AlertDialog.Builder(ChatRoom.this);
+                builder.setMessage("Do you want to delete the message: " + messageText.getText())
+                        .setTitle("Question:")
+                        .setPositiveButton("Yes", (dialog, cl) -> {
+                            //delete the message on screen
+                            ChatMessage removedMessage = messages.remove(position);
+                            myAdapter.notifyItemRemoved(position);
+
+                            //delete the message in database
+                            Executor threadA = Executors.newSingleThreadExecutor();
+                            threadA.execute(() -> {
+                                myDAO.deleteMessage(removedMessage);
+                            });
+
+                            //create a Snackbar to show a message
+                            Snackbar.make(messageText, "You deleted message #" + position, Snackbar.LENGTH_LONG)
+                                    .setAction("Undo", clk -> {
+                                        messages.add(position, removedMessage);
+                                        myAdapter.notifyItemInserted(position);
+                                        //add the deleted message back in database
+                                        Executor threadB = Executors.newSingleThreadExecutor();
+                                        threadB.execute(() -> {
+                                            myDAO.insertMessage(removedMessage);
+                                        });
+                                    })
+                                    .show();
+                        })
+                        .setNegativeButton("No", (dialog, cl) -> {
+                        })
+                        .create().show();
+                 */
 
             });
 
