@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Mohamed Attia Android Labs</string>
-    <string name="hello_message"> Hello World</string>
-    <string name="buttom_message">Button</string>
+        <string name="type_message" translatable="false">Type the name of a city</string>
+        <string name="hint_message" translatable="false">Type city name here</string>
+        <string name="button_message" translatable="false">Get Forecast</string>
+        <string name="hello_message">Hello World</string>
+
+
 </resources>
